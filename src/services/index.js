@@ -6,3 +6,10 @@ export async function getDatasource (params) {
     method: 'get',
   })
 }
+
+export async function getComments(params) {
+  return request({
+    url: `${config.HNapi}/item/${params.itemId}`,
+    method: 'get',
+  })
+}
