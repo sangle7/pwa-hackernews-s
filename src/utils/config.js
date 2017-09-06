@@ -17,6 +17,7 @@ const config = {
   },{
     to: '/about',
     name: 'about'
-  }]
+  }],
+  HNapi:'https://node-hnapi.herokuapp.com',
 }
 export default config

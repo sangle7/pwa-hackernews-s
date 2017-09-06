@@ -9,12 +9,16 @@ const MenuProps = {
 
 const About =(props) =>(<h1>ABOUT ME</h1>)
 const Error =(props) =>(<h1>SORRY 404</h1>)
+const Itempage =(props) =>(<h1>{props.match.params.itemid}</h1>)
+const Userpage =(props) =>(<h1>{props.match.params.username}</h1>)
 const App = () => (
   <Router>
     <div className="App">
       <Menubar {...MenuProps}/>
       <Switch>
         <Route exact path="/about" component={About}></Route>
+        <Route path="/item/:itemid" component={Itempage}></Route>
+        <Route path="/user/:username" component={Userpage}></Route>
         <Route path="/:name/:page" component={Container}></Route>
         <Route component={Error}></Route>
       </Switch>
