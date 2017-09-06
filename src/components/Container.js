@@ -7,7 +7,7 @@ const ListItem = (props) => {
   return (
     <article className=".CZu">
       <a href={data.url}>{data.title}</a>
-      <span>{data.comments_count}
+      <span><Link to={`/item/${data.id}`}>{data.comments_count}</Link>
         comments</span>
       <span>{data.points}
         points</span>
