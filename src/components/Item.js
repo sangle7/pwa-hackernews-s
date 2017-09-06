@@ -1,13 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import {Link} from 'react-router-dom';
 import {getComments} from '../services'
 const Item = (props) => {
   const {match,commentList} = props
   const CommentRecu = (list) => {
-    for(let i=0;i<list.length;i++){
-      const childrens = list[i].comments?CommentRecu(list[i].comments):null
-      return (<article><h1>{list[i].id} </h1> {childrens}</article>)
-    }
+    return list.map(elem=>{
+      const childrens = elem.comments?CommentRecu(elem.comments):null
+      return (
+      <article key={elem.id} style={{marginLeft:`50px`}}>
+        <h1>{elem.id} </h1>
+        <Link to={`/user/${elem.user}`}>{elem.user}</Link>
+        <span>{elem.time_ago}</span>
+        <p dangerouslySetInnerHTML={{__html: elem.content}}></p>
+        {childrens}
+      </article>)
+    })
   }
   return (
     <div>
