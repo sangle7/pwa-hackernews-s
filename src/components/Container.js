@@ -3,16 +3,14 @@ import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom';
 import {getDatasource} from '../services'
 const ListItem = (props) => {
-  const {data} = props
+  const {data,index} = props
   return (
-    <article className=".CZu">
+    <article>
+    <h1>{index}</h1>
       <a href={data.url}>{data.title}</a>
-      <span><Link to={`/item/${data.id}`}>{data.comments_count}</Link>
-        comments</span>
-      <span>{data.points}
-        points</span>
-      <span>{data.time_ago}</span>
-      <Link to={`/user/${data.user}`}>{data.user}</Link>
+      <span>{data.points} points by <Link to={`/user/${data.user}`}> {data.user} </Link> </span>
+      <span> {data.time_ago} </span>
+      <Link to={`/item/${data.id}`}> {data.comments_count} comments</Link>
     </article>
   )
 }
@@ -21,7 +19,7 @@ const Container = (props) => {
   return (
     <div>
       <h1>{props.match.params.name}</h1>
-      {props.listData.map(elem =><ListItem key={elem.id} data={elem} />)}
+      {props.listData.map((elem,index) =><ListItem key={elem.id} data={elem} index={index+1}/>)}
       <Link to={`/${props.match.params.name}/${parseInt(props.match.params.page) - 1}`}>上一页</Link>
       <Link to={`/${props.match.params.name}/${parseInt(props.match.params.page) + 1}`}>下一页</Link>
     </div>
@@ -59,6 +57,7 @@ const LoadFromServer = (Component) => {
     async fetchData(params) {
       try {
         const listData = await getDatasource(params)
+        console.log(listData)
         this.setState({listData:Array.isArray(listData)?listData:Object.values(listData)})
         // show success message
       } catch (err) {
