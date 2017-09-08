@@ -8,7 +8,7 @@ const ListItem = (props) => {
     <article>
     <h1>{index}</h1>
       <a href={data.url}>{data.title}</a>
-      <span>{data.points} points by <Link to={`/user/${data.user}`}> {data.user} </Link> </span>
+      <span>{data.points||0} points by <Link to={`/user/${data.user}`}> {data.user||'anonymous'} </Link> </span>
       <span> {data.time_ago} </span>
       <Link to={`/item/${data.id}`}> {data.comments_count} comments</Link>
     </article>
@@ -41,6 +41,7 @@ const LoadFromServer = (Component) => {
       }else{
         const params={
           page:nextProps.match.params.page,
+          name:nextProps.match.params.name,
         }
         this.fetchData(params)
       }
@@ -48,6 +49,7 @@ const LoadFromServer = (Component) => {
     componentDidMount() {
       const params={
         page:this.props.match.params.page,
+        name:this.props.match.params.name,
       }
       this.fetchData(params)
     }

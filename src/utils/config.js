@@ -3,7 +3,7 @@ const config = {
     to: '/top/1',
     name: 'top'
   },{
-    to: '/new/1',
+    to: '/news/1',
     name: 'new'
   },{
     to: '/show/1',
