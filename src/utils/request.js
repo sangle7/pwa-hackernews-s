@@ -41,7 +41,7 @@ export default function request (options) {
     return {
       code: 200,
       message: statusText,
-      ...data,
+      data:{...data},
     }
   }).catch((error) => {
     const { response = { statusText: 'Network Error' } } = error

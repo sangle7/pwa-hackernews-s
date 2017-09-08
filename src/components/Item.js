@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom';
 import {getComments} from '../services'
 const Item = (props) => {
-  const {match,commentList} = props
+  const {commentList} = props
   const CommentRecu = (list) => {
     return list.map(elem=>{
       const childrens = elem.comments?CommentRecu(elem.comments):null
@@ -49,7 +49,7 @@ const WrappedComment = (Component) => {
     async fetchData(params) {
       try {
         const commentList = await getComments(params)
-        this.setState({commentList})
+        this.setState({commentList:commentList.data})
         // show success message
       } catch (err) {
         // show error tips

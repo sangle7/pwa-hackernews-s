@@ -7,7 +7,7 @@ const Menubar = (props) => {
   return (
     <header className={style.menubar}>
     <ul>
-      {menu.map(elem=>(<Link key={elem.name} to={elem.to}><li>{elem.name}</li></Link>))}
+      {menu.map(elem=>(<li><Link key={elem.name} to={elem.to}>{elem.name}</Link></li>))}
     </ul>
     </header>
   )

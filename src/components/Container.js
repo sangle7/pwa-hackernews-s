@@ -1,27 +1,32 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom';
-import {getDatasource} from '../services'
+import {getDatasource,getNumbers} from '../services'
 const ListItem = (props) => {
   const {data,index} = props
   return (
     <article>
     <h1>{index}</h1>
       <a href={data.url}>{data.title}</a>
-      <span>{data.points||0} points by <Link to={`/user/${data.user}`}> {data.user||'anonymous'} </Link> </span>
+      <span>{data.points?`${data.points} points`:null}  
+      {data.user?<Link to={`/user/${data.user}`}> by {data.user} </Link>:null}
+      </span>
       <span> {data.time_ago} </span>
-      <Link to={`/item/${data.id}`}> {data.comments_count} comments</Link>
+      <Link to={`/item/${data.id}`}> {data.comments_count?`${data.comments_count} comments`:`discuss`}</Link>
     </article>
   )
 }
 const Container = (props) => {
+  const {pageCount,listData} = props
+  const {name,page} = props.match.params
   console.log(props.listData)
   return (
     <div>
-      <h1>{props.match.params.name}</h1>
-      {props.listData.map((elem,index) =><ListItem key={elem.id} data={elem} index={index+1}/>)}
-      <Link to={`/${props.match.params.name}/${parseInt(props.match.params.page) - 1}`}>上一页</Link>
-      <Link to={`/${props.match.params.name}/${parseInt(props.match.params.page) + 1}`}>下一页</Link>
+      <h1>{name}</h1>
+      {listData.map((elem,index) =><ListItem key={elem.id} data={elem} index={index+1}/>)}
+      <Link to={`/${name}/${Math.max(parseInt(page) - 1,1)}`}>上一页</Link>
+      <span>{page}/{pageCount}</span>
+      <Link to={`/${name}/${Math.min(parseInt(page) + 1,pageCount)}`}>下一页</Link>
     </div>
   )
 }
@@ -30,7 +35,8 @@ const LoadFromServer = (Component) => {
     constructor(props) {
       super(props)
       this.state = {
-        listData: []
+        listData: [],
+        pageCount:0,
       }
     }
     componentWillReceiveProps(nextProps, nextState, context) {
@@ -59,8 +65,9 @@ const LoadFromServer = (Component) => {
     async fetchData(params) {
       try {
         const listData = await getDatasource(params)
-        console.log(listData)
-        this.setState({listData:Array.isArray(listData)?listData:Object.values(listData)})
+        const items = await getNumbers(params)
+        console.log(items)
+        this.setState({listData:Object.values(listData.data),pageCount:Math.ceil(Object.keys(items.data).length/30)})
         // show success message
       } catch (err) {
         // show error tips
@@ -69,7 +76,8 @@ const LoadFromServer = (Component) => {
     render() {
       const ComponentProps = {
         ...this.props,
-        listData: this.state.listData
+        listData: this.state.listData,
+        pageCount:this.state.pageCount,
       }
       return (<Component {...ComponentProps}/>)
     }
