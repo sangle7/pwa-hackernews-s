@@ -1,13 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom';
-import style from './style.less'
+
 const Menubar = (props) => {
   const {menu} = props
+  const {name} = '1'
   return (
-    <header className={style.menubar}>
+    <header className="menubar">
     <ul>
-      {menu.map(elem=>(<li><Link key={elem.name} to={elem.to}>{elem.name}</Link></li>))}
+      {menu.map(elem=>(<li className={name===elem.name?'highlight_menu':null}><Link key={elem.name} to={elem.to}>{elem.name}</Link></li>))}
     </ul>
     </header>
   )

@@ -5,7 +5,7 @@ import {getDatasource,getNumbers} from '../services'
 const ListItem = (props) => {
   const {data,index} = props
   return (
-    <article>
+    <article className="articleInfor">
     <h1>{index}</h1>
       <a href={data.url}>{data.title}</a>
       <span>{data.points?`${data.points} points`:null}  
@@ -22,11 +22,10 @@ const Container = (props) => {
   console.log(props.listData)
   return (
     <div>
-      <h1>{name}</h1>
       {listData.map((elem,index) =><ListItem key={elem.id} data={elem} index={index+1}/>)}
-      <Link to={`/${name}/${Math.max(parseInt(page) - 1,1)}`}>上一页</Link>
+      <Link to={`/${name}/${Math.max(parseInt(page) - 1,1)}`}> {`<-`} </Link>
       <span>{page}/{pageCount}</span>
-      <Link to={`/${name}/${Math.min(parseInt(page) + 1,pageCount)}`}>下一页</Link>
+      <Link to={`/${name}/${Math.min(parseInt(page) + 1,pageCount)}`}> {`->`} </Link>
     </div>
   )
 }
