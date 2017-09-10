@@ -2,14 +2,14 @@ import { request, config } from '../utils'
 
 export async function getDatasource (params) {
   return request({
-    url: `${config.HNapi}/${config.requestPrefix[params.name].unofficial}?page=${params.page}`,
+    url: `/api/${config.requestPrefix[params.name].unofficial}?page=${params.page}`,
     method: 'get',
   })
 }
 
 export async function getComments(params) {
   return request({
-    url: `${config.HNapi}/item/${params.itemId}`,
+    url: `/api/item/${params.itemId}`,
     method: 'get',
   })
 }

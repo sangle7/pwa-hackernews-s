@@ -8,17 +8,24 @@ const Item = (props) => {
     return list.map(elem=>{
       const childrens = elem.comments?CommentRecu(elem.comments):null
       return (
-      <article key={elem.id} style={{marginLeft:`50px`}}>
-        <h1>{elem.id} </h1>
+      <article className="discussion" key={elem.id} style={{marginLeft:`50px`}}>
+        <header>
         <Link to={`/user/${elem.user}`}>{elem.user}</Link>
-        <span>{elem.time_ago}</span>
-        <p dangerouslySetInnerHTML={{__html: elem.content}}></p>
+        <span> {elem.time_ago}</span></header>
+        <div dangerouslySetInnerHTML={{__html: elem.content}}></div>
+        <div className="divide-line"/>
         {childrens}
       </article>)
     })
   }
   return (
     <div>
+      <section className="discuessTitle"> 
+        <h1>{commentList.title}</h1>
+        <h4>{commentList.domain}</h4>
+        <span>{commentList.points||0} points</span>
+        {commentList.user?<p>by <Link to={`/user/${commentList.user}`}>{commentList.user}</Link></p>:null}
+      </section>
     {CommentRecu(commentList.comments)}
     </div>
   )

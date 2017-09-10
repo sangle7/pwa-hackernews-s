@@ -6,13 +6,16 @@ const ListItem = (props) => {
   const {data,index} = props
   return (
     <article className="articleInfor">
-    <h1>{index}</h1>
-      <a href={data.url}>{data.title}</a>
-      <span>{data.points?`${data.points} points`:null}  
-      {data.user?<Link to={`/user/${data.user}`}> by {data.user} </Link>:null}
+    <span>{index}</span>
+    <div>
+      <h2><a href={data.url}>{data.title}</a></h2>
+      <p>
+      <span>{data.points?`${data.points} points `:null}  
+      {data.user?<span>by <Link to={`/user/${data.user}`}> {data.user} </Link></span>:null}
       </span>
-      <span> {data.time_ago} </span>
-      <Link to={`/item/${data.id}`}> {data.comments_count?`${data.comments_count} comments`:`discuss`}</Link>
+      <span> {data.time_ago} | </span>
+      <Link to={`/item/${data.id}`}> {data.comments_count?`${data.comments_count} comments`:`discuss`}</Link></p>
+    </div>
     </article>
   )
 }
@@ -22,10 +25,12 @@ const Container = (props) => {
   console.log(props.listData)
   return (
     <div>
+      <p className="pagination">
+        <Link to={`/${name}/${Math.max(parseInt(page) - 1,1)}`}> {`<-`} </Link>
+        <span>{page}/{pageCount}</span>
+        <Link to={`/${name}/${Math.min(parseInt(page) + 1,pageCount)}`}> {`->`} </Link>
+      </p>
       {listData.map((elem,index) =><ListItem key={elem.id} data={elem} index={index+1}/>)}
-      <Link to={`/${name}/${Math.max(parseInt(page) - 1,1)}`}> {`<-`} </Link>
-      <span>{page}/{pageCount}</span>
-      <Link to={`/${name}/${Math.min(parseInt(page) + 1,pageCount)}`}> {`->`} </Link>
     </div>
   )
 }
@@ -44,6 +49,9 @@ const LoadFromServer = (Component) => {
       if (a.name===b.name&&a.page===b.page){
         return 
       }else{
+        this.setState({
+        listData: [],
+      })
         const params={
           page:nextProps.match.params.page,
           name:nextProps.match.params.name,

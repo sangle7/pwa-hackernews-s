@@ -1,37 +1,96 @@
 *{
     margin: 0;
     padding: 0;
-    text-decoration: none;
     list-style: none;
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
 }
 body,html{
-	height: 100%;
-	background: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    line-height: 1.3125;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(255,255,255,0);
+    box-sizing: border-box;
 }
-.menubar{
-    top: 0;
-    width: 100%;
-    height: 64px;
-    background: black;
+h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom:.3rem;
+}
+@media screen and (min-width: 600px){
+body, html {
+    font-size: 16px;
+}}
+@media screen and (min-width: 360px){
+body, html {
+    font-size: 15px;
+}}
+h2, p {
+    font: inherit;
+    font-size: 100%;
+    margin: 0;
+}
+.discuessTitle{
+    margin-bottom: 1.5rem;
+    border-bottom: 2rem solid #f3f3f3;
+    padding: 1rem 1.5rem .5rem;}
+.pagination{
+    text-align: center;
     position: fixed;
+    width: 100%;
+    margin: 0;
+    left: 0;
+    top: 48px;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(0,0,0,.1);
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pagination a{
+	   color: #666;
+text-decoration:none;
+}
+
+ .pagination span{
+ 	    margin: 0 1rem;
+ }
+.menubar{
+    position: fixed;
+    width: 100%;
+    top: 0;
     z-index: 100;
+    height: 48px;
+    padding: 0 16px;
+    box-sizing: border-box;
+    background-color: #3f51b5;
 } 
 .menubar ul{
 	height: 100%;
-	max-width: 1200px;
-	margin: 0 auto;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+    list-style: none;
 }
 
 .menubar ul li{
-	line-height: 64px;
+    line-height: 48px;
     display: inline-block;
     height: 100%;
-    padding: 0 30px;
-    font-size: 1.2rem;
     box-sizing: border-box;
 } 
 .menubar ul li a{
-	color:white;
+    color: #fff;
+    text-decoration: none;
+    margin: 0 .4rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
 }
 .highlight_menu{
 	border-bottom: 5px solid white;
@@ -46,42 +105,38 @@ body,html{
 	margin:100px auto 0 auto;
 }
 .articleInfor{
-    display: block;
-    margin: 20px auto;
-    overflow: hidden;
-    font-size: 15px;
-}
+    display: flex;
+    padding: .5rem 1rem .5rem 0;}
 
-.articleInfor h1{
-    float: left;
-    width: 20px;
-    height: 30px;
-    margin: 5px 20px 0 0;
-    font-size: 25px;
-    font-weight: 200;
+.articleInfor>span{
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    color: #333;
     text-align: right;
+    min-width: 3rem;
 }
+.articleInfor a{
+color:#666}
+.articleInfor h2 a{
+display: block;
+    font-weight: 400;
+    margin-bottom: .5rem;
+    line-height: 1.2;
+    text-decoration: none;
+    color: #000;}
 
-.articleTitle{
-    color: #000;
-    display: block;
+.discussion{
+    line-height: 1.15;
 }
-
-.articleInfor span{
-    font-size: 13px;
-    color: rgb(127, 127, 127)
+.discussion header{
+margin-bottom:1rem;
 }
+.discussion header a,.discuessTitle a{
+color:#666}
 
-.articleInfor span a{
-    text-decoration: underline;
-} 
-
-.pageTurn{
-    width: 100%;
-    text-align: center;
-    margin: 40px 0;
-}
-
-.pageTurn a{
-    color: #000;
+.divide-line{
+height:0;
+width:100%;
+border-top:1px solid #ececec;
+margin: 1rem 0;
 }

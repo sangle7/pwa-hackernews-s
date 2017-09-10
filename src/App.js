@@ -28,7 +28,7 @@ const App = (props) => {
       <div className="App">
       <Route component={User}></Route>
         {/* <Menubar {...MenuProps}/> */}
-        <section className="mainContainer">
+        <main className="mainContainer">
           <Switch>
             <Route exact path="/about" component={About}></Route>
             <Route path="/item/:itemid" component={Item}></Route>
@@ -36,7 +36,7 @@ const App = (props) => {
             <Route path="/:name/:page" component={Container}></Route>
             <Route component={Error}></Route>
           </Switch>
-        </section>
+        </main>
       </div>
     </Router>
   )
