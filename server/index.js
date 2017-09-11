@@ -15,10 +15,11 @@ app.use(compress({
   flush: require('zlib').Z_SYNC_FLUSH
 }))
 app.use(serve('.', {
-  hidden: true,
-  maxage:720000,
+   hidden: true,
 }));
-app.use(serve(__dirname + '/../build'));
+app.use(serve(__dirname + '/../build',{
+  maxage:172800000,
+}));
 app.use(proxy('/api/:params', {
   target: `https://node-hnapi.herokuapp.com/`,
   rewrite: path => path.replace(/\/api/, ''),
