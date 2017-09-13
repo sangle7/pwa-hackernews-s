@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Loading from './Loading'
 import {Link} from 'react-router-dom';
 import {getComments} from '../services'
 const Item = (props) => {
@@ -40,8 +41,9 @@ const WrappedComment = (Component) => {
       super(props)
       this.state = {
         commentList: {
-          comments:[]
-        }
+          comments:[],
+        },
+        loading: true,
       }
     }
     componentDidMount() {
@@ -56,7 +58,10 @@ const WrappedComment = (Component) => {
     async fetchData(params) {
       try {
         const commentList = await getComments(params)
-        this.setState({commentList:commentList.data})
+        this.setState({
+          commentList:commentList.data,
+          loading: false,
+        })
         // show success message
       } catch (err) {
         // show error tips
@@ -67,7 +72,7 @@ const WrappedComment = (Component) => {
         ...this.props,
         commentList: this.state.commentList
       }
-      return (<Component {...ComponentProps}/>)
+      return (this.state.loading?<Loading/>:<Component {...ComponentProps}/>)
     }
   }
 }

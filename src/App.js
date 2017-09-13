@@ -1,16 +1,13 @@
 import React from 'react';
 import './App.css';
 import {BrowserRouter as Router,Redirect,Route, Switch} from 'react-router-dom';
-import {Menubar, Container, Item} from './components'
+import {Menubar, Container, Item,Userpage} from './components'
 import config from './utils/config'
 const About = (props) => (
   <h1>ABOUT ME</h1>
 )
 const Error = (props) => (
   <h1>SORRY 404</h1>
-)
-const Userpage = (props) => (
-  <h1>{props.match.params.username}</h1>
 )
 const User = ({ match }) => {
   const MenuProps = {
