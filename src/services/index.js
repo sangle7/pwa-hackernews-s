@@ -20,3 +20,10 @@ export async function getNumbers(params) {
     method: 'get',
   })
 }
+
+export async function getUser (params) {
+  return request({
+    url:`/api/user/${params.user}`,
+    method: 'get',
+  })
+}

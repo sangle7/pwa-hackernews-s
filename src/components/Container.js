@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Loading from './Loading'
 import {Link} from 'react-router-dom';
 import {getDatasource,getNumbers} from '../services'
 const ListItem = (props) => {
@@ -40,7 +41,8 @@ const LoadFromServer = (Component) => {
       super(props)
       this.state = {
         listData: [],
-        pageCount:0,
+        pageCount: 0,
+        loading: true,
       }
     }
     componentWillReceiveProps(nextProps, nextState, context) {
@@ -51,6 +53,7 @@ const LoadFromServer = (Component) => {
       }else{
         this.setState({
         listData: [],
+        loading: true,
       })
         const params={
           page:nextProps.match.params.page,
@@ -74,7 +77,11 @@ const LoadFromServer = (Component) => {
         const listData = await getDatasource(params)
         const items = await getNumbers(params)
         console.log(items)
-        this.setState({listData:Object.values(listData.data),pageCount:Math.ceil(Object.keys(items.data).length/30)})
+        this.setState({
+          listData: Object.values(listData.data),
+          pageCount: Math.ceil(Object.keys(items.data).length/30),
+          loading: false,
+        })
         // show success message
       } catch (err) {
         // show error tips
@@ -86,7 +93,7 @@ const LoadFromServer = (Component) => {
         listData: this.state.listData,
         pageCount:this.state.pageCount,
       }
-      return (<Component {...ComponentProps}/>)
+      return (this.state.loading?<Loading/>:<Component {...ComponentProps}/>)
     }
   }
 }
