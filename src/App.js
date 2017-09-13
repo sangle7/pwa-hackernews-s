@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router,Redirect,Route, Switch} from 'react-router-dom';
 import {Menubar, Container, Item} from './components'
 import config from './utils/config'
 const About = (props) => (
@@ -34,6 +34,7 @@ const App = (props) => {
             <Route path="/item/:itemid" component={Item}></Route>
             <Route path="/user/:username" component={Userpage}></Route>
             <Route path="/:name/:page" component={Container}></Route>
+            <Redirect from="/" to="/top/1" />
             <Route component={Error}></Route>
           </Switch>
         </main>
