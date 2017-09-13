@@ -4,10 +4,10 @@ import Loading from './Loading'
 import {Link} from 'react-router-dom';
 import {getDatasource,getNumbers} from '../services'
 const ListItem = (props) => {
-  const {data,index} = props
+  const {data,index,page} = props
   return (
     <article className="articleInfor">
-    <span>{index}</span>
+    <span>{(page-1)*30+index}</span>
     <div>
       <h2><a href={data.url}>{data.title}</a></h2>
       <p>
@@ -31,7 +31,7 @@ const Container = (props) => {
         <span>{page}/{pageCount}</span>
         <Link to={`/${name}/${Math.min(parseInt(page) + 1,pageCount)}`}> {`->`} </Link>
       </p>
-      {listData.map((elem,index) =><ListItem key={elem.id} data={elem} index={index+1}/>)}
+      {listData.map((elem,index) =><ListItem page={page} key={elem.id} data={elem} index={index+1}/>)}
     </div>
   )
 }
